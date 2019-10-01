@@ -11,7 +11,7 @@ def stageSwitcher = [
     printEnvironmentVariables : true,
     secretsViolation : [
         credAlert : true,
-        detectSecrets : true
+        detectSecrets : false
         ],
     qualityGates : true,
     publishToMaven : true,
