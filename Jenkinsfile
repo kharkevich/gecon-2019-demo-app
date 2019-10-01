@@ -98,6 +98,7 @@ pipeline {
                 script {
                     echo "not implemented yet"
                 }
+            }
         }
         stage('Docker image'){
             when { expression { "${stageSwitcher.dockerImage}" == "true" } }
