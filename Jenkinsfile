@@ -88,7 +88,7 @@ pipeline {
         }
         stage('Unit tests'){
             steps{
-                container('golang')
+                container('go')
                 sh "ls -l"
                 sh "go test -v"
                 sh "go test -v services"
