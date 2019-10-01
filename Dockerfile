@@ -1,4 +1,4 @@
-FROM golang:1.11 as build-stage
+FROM golang:1.12 as build-stage
 WORKDIR /go/src/devflowapp
 COPY devflowapp.go .
 COPY services/ ./services/
