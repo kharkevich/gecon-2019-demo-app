@@ -90,17 +90,17 @@ pipeline {
             steps{
                 container('go')
                 sh "ls -l"
-                sh "go test -v"
-                sh "go test -v services"
+                // sh "go test -v"
+                // sh "go test -v services"
             }
         }
-        stage('SonarQube tests'){
-            steps{
-                script {
-                    echo "not implemented yet"
-                }
-            }
-        }
+        // stage('SonarQube tests'){
+        //     steps{
+        //         script {
+        //             echo "not implemented yet"
+        //         }
+        //     }
+        // }
         stage('Docker image'){
             when { expression { "${stageSwitcher.dockerImage}" == "true" } }
 
