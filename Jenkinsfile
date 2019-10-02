@@ -19,7 +19,6 @@ def stageSwitcher = [
     upgradeHelmChartDeploymentInRancher : true
     ]
 
-
 /* Declarative pipeline must be enclosed within a pipeline block */
 pipeline {
 
@@ -38,7 +37,6 @@ pipeline {
         HELM_APP_NAME="gecon-app"
         SERVICE_NAME="application"
     }
-
     agent {
       kubernetes {
         label "ci-${determineRepoName()}"
@@ -49,10 +47,8 @@ pipeline {
 	triggers {
         pollSCM('H/5 * * * *')
     }
-
-    
     stages {
-        stage('Print environment variables') {
+        stage('Environment Variables') {
             when { expression { "${stageSwitcher.printEnvironmentVariables}" == "true" } }
 
             steps {
@@ -86,12 +82,12 @@ pipeline {
                 }
             }
         }
-        stage('Unit tests'){
+        stage('Unit Tests'){
             steps{
                 container('go'){
                     sh "go get -d -v ./..."
                     sh "go test -v"
-                    sh "go test -v services"
+                    sh "go test -v ./services"
                 }
             }
         }
@@ -102,15 +98,13 @@ pipeline {
                 }
             }
         }
-        stage('Docker image'){
+        stage('Docker Image'){
             when { expression { "${stageSwitcher.dockerImage}" == "true" } }
-
             steps {
                 // BUILD CONTAINER
                 container('dnd'){
                     sh "docker build --tag $IMG_REG_URL/$PROJECT_KEY/$IMAGE_NAME:tmp -f Dockerfile ."
                 }
-
                 // PUSH CONTAINER
                 script {
                     if (!("${BRANCH_NAME}" =~ "PR.*")){
@@ -127,12 +121,10 @@ pipeline {
                         }
                     }
                 }
-
             }
         }
-        stage('Upgrade helm chart deployment in Rancher'){
+        stage('Upgrade Helm Chart'){
             when { expression { "${stageSwitcher.upgradeHelmChartDeploymentInRancher}" == "true" } }
-            
             steps {
                 script {
                     if ("${BRANCH_NAME}" == "develop") {
@@ -147,6 +139,5 @@ pipeline {
                 }
             }
         }
-
     }
 }
