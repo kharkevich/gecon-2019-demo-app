@@ -86,21 +86,23 @@ pipeline {
                 }
             }
         }
-        // stage('Unit tests'){
-        //     steps{
-        //         container('go')
-        //         sh "ls -l"
-        //         // sh "go test -v"
-        //         // sh "go test -v services"
-        //     }
-        // }
-        // stage('SonarQube tests'){
-        //     steps{
-        //         script {
-        //             echo "not implemented yet"
-        //         }
-        //     }
-        // }
+        stage('Unit tests'){
+            steps{
+                script {
+                    container('go')
+                    sh "ls -l"
+                    // sh "go test -v"
+                    // sh "go test -v services"
+                }
+            }
+        }
+        stage('SonarQube'){
+            steps{
+                script {
+                    echo "not implemented yet"
+                }
+            }
+        }
         stage('Docker image'){
             when { expression { "${stageSwitcher.dockerImage}" == "true" } }
 
