@@ -10,4 +10,4 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -a -installsuffix cgo dev
 FROM scratch as production-stage
 WORKDIR /
 COPY --from=build-stage /go/src/devflowapp /bin/devflowapp
-CMD ["devflowapp"]
+CMD ["/bin/devflowapp"]
