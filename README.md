@@ -161,7 +161,7 @@ CONNECTION_NAME=$PROJECT_ID:$REGION:$INSTANCE_NAME
 
 Run the web app in a separate terminal
 ```
-DBPASSWORD=[your password]
+DBPASSWORD=[your password] # pragma: allowlist secret
 DBUSER=proxyuser
 DBHOST=127.0.0.1
 DATABASE=messagesdb
@@ -248,9 +248,9 @@ Revert the values back to their original symbols by editing app.yaml. To deploy
 with Cloud Build, set the strings as environment variables using the command
 
 ```
-DB_PASSWORD=[user db password]
+DB_PASSWORD=[user db password] # pragma: allowlist secret
 gcloud builds submit \
-  --substitutions=_DB_PASSWORD=$DB_PASSWORD \
+  --substitutions=_DB_PASSWORD=$DB_PASSWORD \ # pragma: allowlist secret
   --config build/cb-deploy.yaml .
 ```
 

@@ -11,7 +11,7 @@ def stageSwitcher = [
     printEnvironmentVariables : true,
     secretsViolation : [
         credAlert : true,
-        detectSecrets : false
+        detectSecrets : true
         ],
     qualityGates : true,
     publishToMaven : true,
@@ -89,9 +89,8 @@ pipeline {
         stage('Unit tests'){
             steps{
                 container('go'){
-                    sh "ls -l"
-                    // sh "go test -v"
-                    // sh "go test -v services"
+                    sh "go test -v"
+                    sh "go test -v services"
                 }
             }
         }
