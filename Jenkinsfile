@@ -86,14 +86,14 @@ pipeline {
                 }
             }
         }
-        stage('Unit tests'){
-            steps{
-                container('go')
-                sh "ls -l"
-                // sh "go test -v"
-                // sh "go test -v services"
-            }
-        }
+        // stage('Unit tests'){
+        //     steps{
+        //         container('go')
+        //         sh "ls -l"
+        //         // sh "go test -v"
+        //         // sh "go test -v services"
+        //     }
+        // }
         // stage('SonarQube tests'){
         //     steps{
         //         script {
