@@ -6,6 +6,7 @@ COPY services/ ./services/
 # RUN go get -d -v ./...
 RUN go get github.com/go-sql-driver/mysql
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -a -installsuffix cgo devflowapp.go
+RUN chmod +x /go/src/devflowapp
 
 FROM scratch as production-stage
 WORKDIR /
